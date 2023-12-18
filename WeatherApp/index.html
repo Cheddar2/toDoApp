@@ -16,6 +16,9 @@
         />
         <button><img src="waimages/search.png" /></button>
       </div>
+      <div class="error">
+        <p>Invalid city name</p>
+      </div>
       <div class="weather">
         <img src="waimages/rain.png" class="weather-icon" />
 
@@ -35,7 +38,7 @@
             <img src="waimages/wind.png" />
             <div>
               <p class="wind"></p>
-              15 km/h
+
               <p>Wind Speed</p>
             </div>
           </div>
@@ -45,11 +48,52 @@
     <script>
       const apiKey = "837d185666ca3adc0ab7ec50e341edb4";
       const apiUrl =
-        "https://api.openweathermap.org/data/2.5/weather?units=metric&q=london";
+        "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+      const searchBox = document.querySelector(".search input");
+      const searchBtn = document.querySelector(".search button");
+      const weatherIcon = document.querySelector(".weather-icon");
 
-      async function checkWeather() {
-        const response = await fetch(apiUrl);
+      async function checkWeather(city) {
+        const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+        if (response.status == 404) {
+          document.querySelector(".error").style.display = "block";
+          document.querySelector(".weather").style.display = "none";
+        } else {
+          var data = await response.json();
+
+          document.querySelector(".city").innerHTML = data.name;
+          document.querySelector(".temp").innerHTML =
+            Math.round(data.main.temp) + "ºc";
+          document.querySelector(".humidity").innerHTML =
+            data.main.humidity + "%";
+          document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+          if (data.weather[0].main == "Clouds") {
+            weatherIcon.src = "waimages/clouds.png";
+          } else if (data.weather[0].main == "Clear") {
+            weatherIcon.src = "waimages/clear.png";
+          } else if (data.weather[0].main == "Rain") {
+            weatherIcon.src = "waimages/rain.png";
+          } else if (data.weather[0].main == "Drizzle") {
+            weatherIcon.src = "waimages/drizzle.png";
+          } else if (data.weather[0].main == "Mist") {
+            weatherIcon.src = "waimages/mist.png";
+          }
+          document.querySelector(".weather").style.display = "block";
+          document.querySelector(".error").style.display = "none";
+        }
       }
+
+      searchBtn.addEventListener("click", () => {
+        const cityName = searchBox.value;
+        if (cityName) {
+          checkWeather(cityName);
+        } else {
+          alert("Please enter a city name.");
+        }
+      });
+
+      checkWeather();
     </script>
   </body>
 </html>
