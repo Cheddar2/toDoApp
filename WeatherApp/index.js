@@ -44,4 +44,15 @@ searchBtn.addEventListener("click", () => {
   }
 });
 
+searchBox.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    const cityName = searchBox.value;
+    if (cityName) {
+      checkWeather(cityName);
+    } else {
+      alert("Please enter a city name");
+    }
+  }
+});
+
 checkWeather();
