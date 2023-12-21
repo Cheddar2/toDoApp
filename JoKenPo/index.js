@@ -19,3 +19,5 @@ function playerMove(event) {
 function compareMoves() {}
 
 function updateScores() {}
+
+console.log("test1");
