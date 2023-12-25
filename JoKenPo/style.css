@@ -1,8 +1,35 @@
 * {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+body {
   background-color: #222;
 }
 
 .title {
   margin-left: 650px;
   margin-top: 100px;
+}
+.buttons {
+  text-align: center;
+}
+.buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  background-color: #0a630d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+.buttons button:hover {
+  background-color: #14e01b;
+}
+.score-container {
+  text-align: center;
+  margin-top: 10px;
 }
