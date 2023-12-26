@@ -44,16 +44,28 @@ function updateScores(result) {
   const winsElement = document.getElementById("wins");
   const lossesElement = document.getElementById("losses");
   const tiesElement = document.getElementById("ties");
+  const resultImage = document.getElementById("resultImage");
+  const messageElement = document.getElementById("resultText");
+  const resultTextBottom = document.getElementById("resultTextBottom");
 
   switch (result) {
     case "win":
       winsElement.textContent = parseInt(winsElement.textContent) + 1;
+      resultImage.src = "jkpimages/win.png";
+      resultTextTop.textContent = "You won";
+      resultTextBottom.textContent = "asshole >:(";
       break;
     case "loss":
       lossesElement.textContent = parseInt(lossesElement.textContent) + 1;
+      resultImage.src = "jkpimages/lose.png";
+      resultTextTop.textContent = "You Lost";
+      resultTextBottom.textContent = "HAHAHAHHAH YOU SUCK";
       break;
     case "tie":
       tiesElement.textContent = parseInt(tiesElement.textContent) + 1;
+      resultImage.src = "jkpimages/tie.png";
+      resultTextTop.textContent = "Tie";
+      resultTextBottom.textContent = "A TiE a fUcKinG tiE fuck you";
       break;
   }
 }
